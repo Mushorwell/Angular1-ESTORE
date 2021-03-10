@@ -1,0 +1,12 @@
+<div class="card col-md-12" *ngIf='currentUser'>
+    <h1>Welcome {{currentUser.firstName}} {{currentUser.lastName}}</h1>
+    <br>
+    <tr>
+      <td><b>email:        </b></td>
+      <td>{{currentUser.email}}</td>
+    </tr>
+    <tr>
+      <td><b>Phone:        </b></td>
+      <td>{{currentUser.phoneNumber}}</td>
+    </tr>
+</div>

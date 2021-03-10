@@ -1,0 +1,123 @@
+<div class="card card-body">
+  <div class="container-fluid">
+    <div class="text-center">
+      <h1>Sign Up</h1>
+    </div>
+    <form novalidate
+          (ngSubmit)="save()"
+          [formGroup]="registerUserForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="firstNameId">First Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="firstNameId"
+                 type="text"
+                 placeholder="First Name (required)"
+                 formControlName="firstName"
+                 [ngClass]="{'is-invalid': displayMessage.firstName}" />
+          <span class="invalid-feedback">
+            {{ displayMessage.firstName}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="lastNameId">Last Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="lastNameId"
+                 type="text"
+                 placeholder="Last Name (required)"
+                 formControlName="lastName"
+                 [ngClass]="{'is-invalid': displayMessage.lastName}" />
+          <span class="invalid-feedback">
+            {{displayMessage.lastName}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="emailId">Email</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="emailId"
+                 type="email"
+                 placeholder="Email (required)"
+                 formControlName="email"
+                 [ngClass]="{'is-invalid': displayMessage.email}" />
+            <span class="invalid-feedback">
+              {{displayMessage.email}}
+          </span>
+        </div>
+      </div>
+
+      <div formGroupName="passwordGroup">
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="passwordId">Password</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="passwordId"
+                   type="password"
+                   placeholder="Password (required)"
+                   formControlName="password"
+                   [ngClass]="{'is-invalid': displayMessage.password }" />
+            <span class="invalid-feedback">
+              {{displayMessage.password}}
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="confirmPasswordId">Confirm Password</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="confirmPasswordId"
+                   type="password"
+                   placeholder="Confirm Password (required)"
+                   formControlName="confirmPassword"
+                   [ngClass]="{'is-invalid': displayMessage.confirmPassword || displayMessage.passwordGroup }" />
+            <span class="invalid-feedback">
+              {{ displayMessage.confirmPassword + displayMessage.passwordGroup }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="phoneId">Phone</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="phoneId"
+                 type="tel"
+                 placeholder="Phone"
+                 formControlName="phone"
+                 [ngClass]="{'is-invalid': displayMessage.phone}" />
+          <span class="invalid-feedback">
+            {{displayMessage.phone}}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3"
+                  type="submit"
+                  style="width:80px"
+                  [title]="registerUserForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!registerUserForm.valid">
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- <br>Valid: {{registerUserForm.valid}}
+<br>Value: {{registerUserForm.value | json }} -->

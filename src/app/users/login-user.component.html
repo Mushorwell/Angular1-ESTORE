@@ -1,0 +1,78 @@
+<div class="card card-body">
+  <div class="container-fluid">
+    <div class="text-center">
+      <h1>Sign in</h1>
+    </div>
+    <form novalidate
+          (ngSubmit)="save(signInForm)"
+          #signInForm="ngForm">
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="emailId">Email</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="emailId"
+                 type="email"
+                 placeholder="Email (required)"
+                 [pattern]="regexString"
+                 required
+                 email
+                 [(ngModel)]="user.email"
+                 name="email"
+                 #emailVar="ngModel"
+                 [ngClass]="{'is-invalid': (emailVar.touched || emailVar.dirty) && !emailVar.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="emailVar.errors?.pattern">
+              Please enter a valid email address with no spaces.<br/>
+            </span>
+            <span *ngIf="emailVar.errors?.required">
+              Please enter your email address.<br/>
+            </span>
+            <span *ngIf="emailVar.errors?.email">
+              Please enter a valid email address.<br/>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="passwordId">Password</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="passwordId"
+                 type="password"
+                 placeholder="Password (required)"
+                 required
+                 [pattern]="regexString"
+                 [(ngModel)]="user.password"
+                 name="password"
+                 #passwordVar="ngModel"
+                 [ngClass]="{'is-invalid': (passwordVar.touched || passwordVar.dirty) && !passwordVar.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="passwordVar.errors?.required">
+              Please enter your password.
+            </span>
+            <span *ngIf="passwordVar.errors?.pattern">
+              Please enter a valid password with no trailing spaces.<br/>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3"
+                  type="submit"
+                  style="width:80px"
+                  [title]="signInForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!signInForm.valid">
+            Submit
+          </button>
+        </div>
+      </div>
+  </form>
+  </div>
+</div>
+<!-- <br>Dirty: {{signInForm.dirty}} -->

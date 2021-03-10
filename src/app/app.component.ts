@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from './users/user';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-store';
+  title = 'ESTORE';
+
+  userProfile: string = localStorage.getItem('loggedIn');
+
+  activeUser: string;
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+  }
+
+  signOut(): void {
+    localStorage.clear();
+    this.ngOnInit();
+    location.reload();
+    this.router.navigateByUrl('/');
+    // console.log(localStorage);
+  }
 }
