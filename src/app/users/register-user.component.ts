@@ -34,8 +34,11 @@ export class RegisterUserComponent implements OnInit, AfterViewInit {
   private maxLastNameLength: number;
   private maxEmailLength: number;
   private maxPasswordLength: number;
-  private minPhoneLength;
-  private maxPhoneLength;
+  private minPhoneLength: number;
+  private maxPhoneLength: number;
+  private regexStringNumber: string;
+  private regexStringText: string;
+
 
   displayMessage: { [key: string]: string } = {};
   private validationMessages: { [key: string]: { [key: string]: string } };
@@ -57,6 +60,8 @@ export class RegisterUserComponent implements OnInit, AfterViewInit {
   this.maxPasswordLength = 25;
   this.minPhoneLength = 10;
   this.maxPhoneLength = 10;
+  this.regexStringNumber = '^[0-9]+$';
+  this.regexStringText = '/^[a-zA-Z0-9,-.@~!#$%&*<>?:;_=\'/()]+(\\s+[a-zA-Z0-9,-.@~!#$%&*<>?:;_=\'/()]+)*$/';
 
   this.validationMessages = {
     firstName: {
@@ -101,10 +106,6 @@ export class RegisterUserComponent implements OnInit, AfterViewInit {
   this.genericValidator = new GenericValidator(this.validationMessages);
 }
 
-
-  // Regular expression string for validating field whitespaces
-  regexString = '^[a-zA-Z0-9,-.@~!#$%&*<>?:;_=\'/()]+(\\s+[a-zA-Z0-9,-.@~!#$%&*<>?:;_=\'/()]+)*$';
-
   // private validationMessages = {
   //   required: 'Please enter your email address.',
   //   email: 'Please enter a valid email address.'
@@ -121,20 +122,20 @@ export class RegisterUserComponent implements OnInit, AfterViewInit {
         Validators.minLength(this.minFirstNameLength),
         Validators.maxLength(this.maxFirstNameLength),
         // checkValidInput,
-        Validators.pattern(this.regexString)]],
+        Validators.pattern(this.regexStringText)]],
 
       lastName: ['',
       [Validators.required,
         Validators.minLength(this.minLastNameLength),
         Validators.maxLength(this.maxLastNameLength),
         // checkValidInput,
-        Validators.pattern(this.regexString)]],
+        Validators.pattern(this.regexStringText)]],
 
       email: ['',
       [Validators.required,
         Validators.email,
         Validators.maxLength(this.maxEmailLength),
-        Validators.pattern(this.regexString)]],
+        Validators.pattern(this.regexStringText)]],
 
       passwordGroup: this.fb.group({
 
@@ -142,12 +143,12 @@ export class RegisterUserComponent implements OnInit, AfterViewInit {
         [Validators.required,
           Validators.maxLength(this.maxPasswordLength),
           // checkValidInput,
-          Validators.pattern(this.regexString)
+          Validators.pattern(this.regexStringText)
         ]],
 
         confirmPassword: ['',
         [Validators.required,
-        Validators.pattern(this.regexString)]]
+        Validators.pattern(this.regexStringText)]]
 
       }),
 
@@ -155,7 +156,7 @@ export class RegisterUserComponent implements OnInit, AfterViewInit {
       [Validators.required,
         Validators.minLength(this.minPhoneLength),
         Validators.maxLength(this.maxPhoneLength),
-        Validators.pattern('^[0-9]+$')]],
+        Validators.pattern(this.regexStringNumber)]],
     });
     const passwordFormGroup = this.registerUserForm.get('passwordGroup');
     passwordFormGroup.setValidators(MatchValidator.match(passwordFormGroup.get('password'), passwordFormGroup.get('confirmPassword')));

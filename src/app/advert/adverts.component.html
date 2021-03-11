@@ -1,26 +1,8 @@
-<div class="card col-md-12" *ngIf='currentUser'>
-    <h1>Welcome {{currentUser.firstName}} {{currentUser.lastName}}</h1>
-    <br>
-    <div class="row">
-      <div class="col-md-3">
-        <h3>Email Address: </h3>
-      </div>
-      <div class="col-md-6">
-        <a href="#" style="font-size: 27px;">{{currentUser.email}}</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3">
-        <h3>Phone Number: </h3>
-      </div>
-      <div class="col-md-6">
-        <a href="#" style="font-size: 27px;">{{currentUser.phoneNumber}}</a>
-      </div>
-    </div>
-    <br>
-</div>
+<div class="card">
+  <div class="card-header">
+    {{pageTitle}}
+  </div>
 
-<div class="card col-md-12">
   <div class="card-body">
     <div class="row">
       <div class="col-md-2">Filter by:</div>
@@ -38,12 +20,12 @@
 
     <div class="table-responsive">
       <table class="table mb-0"
-             *ngIf="userAdverts && userAdverts.length">
+             *ngIf="adverts && adverts.length">
         <tbody>
           <tr *ngFor= "let advert of filteredAdverts">
             <div class="card">
               <div class="card-header">
-                <a [routerLink]="['adverts', advert.id]">
+                <a [routerLink]="['/adverts', advert.id]">
                   {{ advert.name }}
                 </a>
               </div>
@@ -53,16 +35,25 @@
               </div>
               <div class="card-footer">
                 <div class="row">
-                  <div class="col-md-10"><h3>{{ advert.price | currency:"ZAR":"symbol":"1.2-2" }}</h3></div>
+                  <div class="col-md-9"><h3>{{ advert.price | currency:"ZAR":"symbol":"1.2-2" }}</h3></div>
                   <div class="col-md-1">
                     <button class="btn btn-outline-primary btn-sm"
-                        [routerLink]="['/adverts', advert.id, 'edit']">
+                        [routerLink]="['/adverts', advert.id, 'edit']"
+                        *ngIf="loggedIn">
                       Edit
                     </button>
                   </div>
                   <div class="col-md-1">
+                    <button class="btn btn-outline-success btn-sm"
+                        [routerLink]="['/adverts', advert.id]"
+                        *ngIf="loggedIn">
+                      Buy
+                    </button>
+                  </div>
+                  <div class="col-md-1">
                   <button class="btn btn-outline-primary btn-sm"
-                      [routerLink]="['/adverts', advert.id]">
+                      [routerLink]="['/adverts', advert.id]"
+                      *ngIf="!loggedIn">
                     View
                   </button>
                 </div>
@@ -76,4 +67,9 @@
     </div>
 
   </div>
+</div>
+
+<div *ngIf="errorMessage"
+     class="alert alert-danger">
+  Error: {{ errorMessage }}
 </div>

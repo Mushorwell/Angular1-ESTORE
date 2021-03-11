@@ -1,0 +1,63 @@
+<div class="card">
+  <div class="card-header"
+       *ngIf="advertisement">
+    {{pageTitle + ": " + advertisement.name}}
+  </div>
+
+  <div class="card-body"
+       *ngIf="advertisement">
+
+    <div class="row">
+
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-3">Name:</div>
+          <div class="col-md-6">{{advertisement.name}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Description:</div>
+          <div class="col-md-6">{{advertisement.description}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Date Added:</div>
+          <div class="col-md-6">{{advertisement.dateAdded | date}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Price:</div>
+          <div class="col-md-6">{{advertisement.price|currency:"ZAR":"symbol"}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Tags:</div>
+          <div class="col-md-6">{{advertisement.tags}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <button class="btn btn-outline-secondary mr-3"
+                style="width:80px"
+                (click)="onBack()">
+          Back
+        </button>
+        <button class="btn btn-outline-primary"
+                style="width:80px"
+                [routerLink]="['/adverts', advertisement.id, 'edit']"
+                *ngIf="isLoggedIn">
+          Edit
+        </button>
+        <button class="btn btn-outline-success"
+                style="width:80px"
+                (click)="onBuy()"
+                *ngIf="isLoggedIn">
+          Buy
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="alert alert-danger"
+       *ngIf="errorMessage">{{errorMessage}}
+  </div>
+</div>

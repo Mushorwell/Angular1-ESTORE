@@ -1,4 +1,4 @@
-import {User} from '../app/users/user';
+import { User } from '../app/users/user';
 
 export class UserData {
   static users: User[] = [

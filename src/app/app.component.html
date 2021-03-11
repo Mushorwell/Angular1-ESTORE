@@ -18,6 +18,21 @@
     </li>
     <li class="nav-item">
       <a class="nav-link"
+      [routerLink]="['adverts']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact : true}"
+      >Adverts</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"
+      [routerLink]="['adverts/0/edit']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact : true}"
+      *ngIf='userProfile'
+      >Add Advert</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"
       [routerLink]="['login']"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact : true}"
